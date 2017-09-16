@@ -1,0 +1,66 @@
+[gd_scene load_steps=5 format=1]
+
+[ext_resource path="res://Tutorial3/player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Tutorial3/player.gd" type="Script" id=2]
+[ext_resource path="res://Tutorial3/tileset.tres" type="TileSet" id=3]
+[ext_resource path="res://Tutorial3/camera.gd" type="Script" id=4]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+
+transform/pos = Vector2( 0, -39.7606 )
+script/script = ExtResource( 2 )
+GRAVITY = 15
+MOVE_SPEED = 2
+MAX_JUMP_POWER = 4
+MIN_AIR_JUMP_POWER = 1
+
+[node name="TileMap" type="TileMap" parent="."]
+
+mode = 0
+tile_set = ExtResource( 3 )
+cell/size = Vector2( 16, 16 )
+cell/quadrant_size = 16
+cell/custom_transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+cell/half_offset = 2
+cell/tile_origin = 0
+cell/y_sort = false
+collision/use_kinematic = false
+collision/friction = 1.0
+collision/bounce = 0.0
+collision/layers = 1
+collision/mask = 1
+occluder/light_mask = 1
+tile_data = IntArray( 327667, 3, 327668, 4, 327669, 4, 327670, 4, 327671, 4, 327672, 4, 327673, 4, 327674, 4, 327675, 4, 327676, 4, 327677, 4, 327678, 4, 327679, 4, 262144, 4, 262145, 4, 262146, 4, 262147, 4, 262148, 4, 262149, 4, 262150, 4, 262151, 4, 262152, 4, 262153, 4, 262154, 4, 262155, 4, 262156, 5, 393203, 6, 393204, 7, 393205, 7, 393206, 7, 393207, 7, 393208, 7, 393209, 7, 393210, 7, 393211, 7, 393212, 7, 393213, 7, 393214, 7, 393215, 7, 327680, 7, 327681, 7, 327682, 7, 327683, 7, 327684, 7, 327685, 7, 327686, 7, 327687, 7, 327688, 7, 327689, 7, 327690, 7, 327691, 7, 327692, 8, 458739, 6, 458740, 7, 458741, 7, 458742, 7, 458743, 7, 458744, 7, 458745, 7, 458746, 7, 458747, 7, 458748, 7, 458749, 7, 458750, 7, 458751, 7, 393216, 7, 393217, 7, 393218, 7, 393219, 7, 393220, 7, 393221, 7, 393222, 7, 393223, 7, 393224, 7, 393225, 7, 393226, 7, 393227, 7, 393228, 8, 524275, 9, 524276, 10, 524277, 10, 524278, 10, 524279, 10, 524280, 10, 524281, 10, 524282, 10, 524283, 10, 524284, 10, 524285, 10, 524286, 10, 524287, 10, 458752, 10, 458753, 10, 458754, 10, 458755, 10, 458756, 10, 458757, 10, 458758, 10, 458759, 10, 458760, 10, 458761, 10, 458762, 10, 458763, 10, 458764, 11 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+offset = Vector2( 0, -30 )
+anchor_mode = 1
+rotating = false
+current = true
+zoom = Vector2( 1, 1 )
+limit/left = -10000000
+limit/top = -10000000
+limit/right = 10000000
+limit/bottom = 10000000
+drag_margin/h_enabled = false
+drag_margin/v_enabled = false
+smoothing/enable = false
+smoothing/speed = 0.0
+drag_margin/left = 0.2
+drag_margin/top = 0.2
+drag_margin/right = 0.2
+drag_margin/bottom = 0.2
+script/script = ExtResource( 4 )
+target = "../Player"
+forward_offset = 60
+max_y_offset = 5
+x_smoothing = 0.05
+y_smoothing = 0.1
+
+
