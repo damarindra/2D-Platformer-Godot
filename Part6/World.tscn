@@ -6,10 +6,6 @@
 [ext_resource path="res://Part6/camera.gd" type="Script" id=4]
 [ext_resource path="res://Part6/level_bounds.gd" type="Script" id=5]
 
-
-
-
-
 [node name="Node2D" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]

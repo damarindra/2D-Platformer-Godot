@@ -1,0 +1,197 @@
+[gd_scene load_steps=11 format=1]
+
+[ext_resource path="res://Part7/tileset.tres" type="TileSet" id=1]
+[ext_resource path="res://Part7/player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://tiles.png" type="Texture" id=3]
+[ext_resource path="res://Part7/enemy.gd" type="Script" id=4]
+[ext_resource path="res://Part7/character_controller.gd" type="Script" id=5]
+[ext_resource path="res://Part7/camera.gd" type="Script" id=6]
+[ext_resource path="res://Part7/level_bounds.gd" type="Script" id=7]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 8, 8 )
+
+[sub_resource type="Animation" id=3]
+
+resource/name = "Idle"
+length = 1.0
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = {
+"times": FloatArray( 0 ),
+"transitions": FloatArray( 1 ),
+"update": 1,
+"values": [ 6 ]
+}
+
+[sub_resource type="Animation" id=2]
+
+resource/name = "Move"
+length = 0.6
+loop = true
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = {
+"times": FloatArray( 0, 0.3, 0.6 ),
+"transitions": FloatArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 6, 7, 6 ]
+}
+
+[node name="Node2D" type="Node2D"]
+
+[node name="TileMap" type="TileMap" parent="."]
+
+mode = 0
+tile_set = ExtResource( 1 )
+cell/size = Vector2( 16, 16 )
+cell/quadrant_size = 16
+cell/custom_transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+cell/half_offset = 2
+cell/tile_origin = 0
+cell/y_sort = false
+collision/use_kinematic = false
+collision/friction = 1.0
+collision/bounce = 0.0
+collision/layers = 1
+collision/mask = 1
+occluder/light_mask = 1
+tile_data = IntArray( 327667, 3, 327668, 4, 327669, 4, 327670, 4, 327671, 4, 327672, 4, 327673, 4, 327674, 4, 327675, 4, 327676, 4, 327677, 4, 327678, 4, 327679, 4, 262144, 4, 262145, 4, 262146, 4, 262147, 5, 262151, 3, 262152, 5, 262155, 3, 262156, 4, 262157, 5, 393203, 6, 393204, 7, 393205, 7, 393206, 7, 393207, 7, 393208, 7, 393209, 7, 393210, 7, 393211, 7, 393212, 7, 393213, 7, 393214, 7, 393215, 7, 327680, 7, 327681, 7, 327682, 7, 327683, 7, 327684, 4, 327685, 4, 327686, 4, 327687, 7, 327688, 7, 327689, 4, 327690, 4, 327691, 7, 327692, 7, 327693, 8, 458739, 6, 458740, 7, 458741, 7, 458742, 7, 458743, 7, 458744, 7, 458745, 7, 458746, 7, 458747, 7, 458748, 7, 458749, 7, 458750, 7, 458751, 7, 393216, 7, 393217, 7, 393218, 7, 393219, 7, 393220, 7, 393221, 7, 393222, 7, 393223, 7, 393224, 7, 393225, 7, 393226, 7, 393227, 7, 393228, 7, 393229, 8, 524275, 9, 524276, 10, 524277, 10, 524278, 10, 524279, 10, 524280, 10, 524281, 10, 524282, 10, 524283, 10, 524284, 10, 524285, 10, 524286, 10, 524287, 10, 458752, 10, 458753, 10, 458754, 10, 458755, 10, 458756, 10, 458757, 10, 458758, 10, 458759, 10, 458760, 10, 458761, 10, 458762, 10, 458763, 10, 458764, 10, 458765, 11 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+
+editor/display_folded = true
+transform/pos = Vector2( 104, 32 )
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+editor/display_folded = true
+layer = -1
+offset = Vector2( 0, 0 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
+scroll/offset = Vector2( 0, 0 )
+scroll/base_offset = Vector2( 0, 0 )
+scroll/base_scale = Vector2( 1, 1 )
+scroll/limit_begin = Vector2( 0, 0 )
+scroll/limit_end = Vector2( 0, 0 )
+scroll/ignore_camera_zoom = false
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+
+transform/pos = Vector2( 0, -70 )
+motion/scale = Vector2( 0.5, 0.2 )
+motion/offset = Vector2( 0, 0 )
+motion/mirroring = Vector2( 160, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
+
+texture = ExtResource( 3 )
+centered = false
+region = true
+region_rect = Rect2( 0, 176, 160, 128 )
+
+[node name="Slime" type="KinematicBody2D" parent="."]
+
+transform/pos = Vector2( 160, 64 )
+input/pickable = false
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 8, 8 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+collision/margin = 0.08
+script/script = ExtResource( 4 )
+initial_movement = 1
+RAY_LENGTH = 5
+
+[node name="Controller" type="Node" parent="Slime"]
+
+script/script = ExtResource( 5 )
+GRAVITY = 10.0
+MAX_FALLING_SPEED = 15.0
+MOVE_SPEED = 0.2
+MOVE_SPEED_TIME_NEEDED = 0.15
+DECELERATION_TIME_NEEDED = 0.15
+MAX_JUMP_POWER = 5.0
+MIN_JUMP_POWER = 2.0
+MAX_AIR_JUMP_POWER = 3.0
+MIN_AIR_JUMP_POWER = 1.0
+MAX_AIR_JUMP_COUNT = 2.0
+
+[node name="Sprite" type="Sprite" parent="Slime"]
+
+texture = ExtResource( 3 )
+centered = false
+vframes = 20
+hframes = 22
+frame = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Slime"]
+
+transform/pos = Vector2( 8, 8 )
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
+
+[node name="anim" type="AnimationPlayer" parent="Slime"]
+
+playback/process_mode = 1
+playback/default_blend_time = 0.0
+root/root = NodePath("..")
+anims/Idle = SubResource( 3 )
+anims/Move = SubResource( 2 )
+playback/active = true
+playback/speed = 1.0
+blend_times = [  ]
+autoplay = "Idle"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+offset = Vector2( 0, -15 )
+anchor_mode = 1
+rotating = false
+current = true
+zoom = Vector2( 1, 1 )
+limit/left = -10000000
+limit/top = -10000000
+limit/right = 10000000
+limit/bottom = 10000000
+drag_margin/h_enabled = false
+drag_margin/v_enabled = false
+smoothing/enable = false
+smoothing/speed = 0.0
+drag_margin/left = 0.2
+drag_margin/top = 0.2
+drag_margin/right = 0.2
+drag_margin/bottom = 0.2
+script/script = ExtResource( 6 )
+target = "../Player"
+forward_offset = 60
+max_y_offset = 10
+x_smoothing = 0.05
+y_smoothing = 0.1
+
+[node name="Bounds" type="Node2D" parent="."]
+
+transform/pos = Vector2( 0, 56 )
+transform/scale = Vector2( 6.5, 2.25 )
+script/script = ExtResource( 7 )
+left_stop = true
+right_stop = true
+top_stop = true
+
+
+[editable path="Player"]
