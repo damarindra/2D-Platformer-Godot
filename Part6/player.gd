@@ -89,12 +89,12 @@ func _fixed_process(delta):
 	# set the velocity = movement
 	velocity = movement
 	
-	if get_center_pos().x + velocity.x < bounds.get_left() and bounds.left_stop:
-		velocity.x = bounds.get_left()-get_center_pos().x
-	elif get_center_pos().x + velocity.x > bounds.get_right() and bounds.right_stop:
-		velocity.x = bounds.get_right()-get_center_pos().x
-	if get_center_pos().y + velocity.y < bounds.get_top() and bounds.top_stop:
-		velocity.y = bounds.get_top() - get_center_pos().y
+	if get_center_pos().x - get_node("CollisionShape2D").get_shape().get_extents().x + velocity.x < bounds.get_left() and bounds.left_stop:
+		velocity.x = bounds.get_left()-get_center_pos().x + get_node("CollisionShape2D").get_shape().get_extents().x
+	elif get_center_pos().x + get_node("CollisionShape2D").get_shape().get_extents().x + velocity.x > bounds.get_right() and bounds.right_stop:
+		velocity.x = bounds.get_right()-get_center_pos().x - get_node("CollisionShape2D").get_shape().get_extents().x
+	if get_center_pos().y - get_node("CollisionShape2D").get_shape().get_extents().y + velocity.y < bounds.get_top() and bounds.top_stop:
+		velocity.y = bounds.get_top() - get_center_pos().y+ get_node("CollisionShape2D").get_shape().get_extents().x
 	
 	# apply the movement by calling move(velocity) and store the remaining movement
 	var remaining_movement = move(velocity)

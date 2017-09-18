@@ -91,25 +91,11 @@ y_smoothing = 0.1
 
 [node name="Bounds" type="Node2D" parent="."]
 
+transform/pos = Vector2( 0, 56 )
+transform/scale = Vector2( 6.5, 2.25 )
 script/script = ExtResource( 5 )
 left_stop = true
 right_stop = true
 top_stop = true
-
-[node name="Left" type="Position2D" parent="Bounds"]
-
-transform/pos = Vector2( -210, 30 )
-
-[node name="Top" type="Position2D" parent="Bounds"]
-
-transform/pos = Vector2( 0, -30 )
-
-[node name="Right" type="Position2D" parent="Bounds"]
-
-transform/pos = Vector2( 210, 20 )
-
-[node name="Bottom" type="Position2D" parent="Bounds"]
-
-transform/pos = Vector2( 0, 100 )
 
 
