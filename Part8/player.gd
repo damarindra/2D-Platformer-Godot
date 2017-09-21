@@ -2,7 +2,7 @@ extends "res://Part8/character_controller.gd"
 
 var last_anim = ""
 onready var anim = get_node("anim")
-onready var sprite = get_node("Sprite")
+var enemy_script = preload("res://Part8/enemy.gd")
 
 # Called when the node is "ready", that means called when the game started.
 # Use this function for initialize
@@ -23,12 +23,24 @@ func _fixed_process(delta):
 	var jump_input = Input.is_action_pressed("jump")
 
 	var remaining_movement = calculate_movement(right_input, left_input, jump_input, delta)
+	if is_colliding():
+		#check if collider is KinematicBody
+		if get_collider().get_type() == "KinematicBody2D":
+			#check if collider layer inside layer 1
+			if get_collider().get_layer_mask_bit(1):
+				# make sure if collider is enemy
+				if get_collider() extends enemy_script:
+					take_damage(get_collider().damage_given)
+					revert_motion()
+	
 	collision_handling(remaining_movement)
 
 	sprite.set_flip_h(facing_dir != 1)
 
 	var new_anim = "Idle"
-	if last_frame_grounded:
+	if is_bouncing:
+		new_anim = "GetDamage"
+	elif last_frame_grounded:
 		if velocity.x != 0:
 			new_anim = "Move"
 	else:

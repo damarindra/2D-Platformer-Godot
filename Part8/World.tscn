@@ -1,11 +1,11 @@
 [gd_scene load_steps=10 format=1]
 
-[ext_resource path="res://Part7/tileset.tres" type="TileSet" id=1]
-[ext_resource path="res://Part7/player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Part8/tileset.tres" type="TileSet" id=1]
+[ext_resource path="res://Part8/player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://tiles.png" type="Texture" id=3]
-[ext_resource path="res://Part7/enemy.gd" type="Script" id=4]
-[ext_resource path="res://Part7/camera.gd" type="Script" id=5]
-[ext_resource path="res://Part7/level_bounds.gd" type="Script" id=6]
+[ext_resource path="res://Part8/enemy.gd" type="Script" id=4]
+[ext_resource path="res://Part8/camera.gd" type="Script" id=5]
+[ext_resource path="res://Part8/level_bounds.gd" type="Script" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -70,8 +70,14 @@ __meta__ = {
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 
-editor/display_folded = true
 transform/pos = Vector2( 104, 32 )
+collision/mask = 3
+collision/margin = 0.02
+bounce_dir = Vector2( 3, -3 )
+uncontrolable_invisible = 0.2
+MOVE_SPEED = 2.0
+MAX_JUMP_POWER = 4.0
+MAX_AIR_JUMP_COUNT = 1.0
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -108,10 +114,14 @@ input/pickable = false
 shapes/0/shape = SubResource( 1 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 8, 8 )
 shapes/0/trigger = false
-collision/layers = 1
+collision/layers = 2
 collision/mask = 1
-collision/margin = 0.08
+collision/margin = 0.02
 script/script = ExtResource( 4 )
+MAX_HEALTH = 10
+INVISIBLE_TIME = 2.0
+bounce_dir = Vector2( 0, 0 )
+uncontrolable_invisible = 0.5
 GRAVITY = 10.0
 MAX_FALLING_SPEED = 15.0
 MOVE_SPEED = 0.2
@@ -123,6 +133,7 @@ MAX_AIR_JUMP_POWER = 3.0
 MIN_AIR_JUMP_POWER = 1.0
 MAX_AIR_JUMP_COUNT = 2.0
 initial_movement = 1
+damage_given = 1
 RAY_LENGTH = 5
 
 [node name="Sprite" type="Sprite" parent="Slime"]
@@ -172,8 +183,8 @@ drag_margin/top = 0.2
 drag_margin/right = 0.2
 drag_margin/bottom = 0.2
 script/script = ExtResource( 5 )
-target = "../Player"
-forward_offset = 60
+target = NodePath("../Player")
+forward_offset = 50
 max_y_offset = 10
 x_smoothing = 0.05
 y_smoothing = 0.1

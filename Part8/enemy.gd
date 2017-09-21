@@ -1,12 +1,11 @@
-extends "res://Part7/character_controller.gd"
+extends "res://Part8/character_controller.gd"
 
 export var initial_movement = 1
 var move_dir = 0
-
+export var damage_given = 1
 
 var last_anim = ""
 onready var anim = get_node("anim")
-onready var sprite = get_node("Sprite")
 onready var hole_raycaster = RayCast2D.new()
 export var RAY_LENGTH = 5
 

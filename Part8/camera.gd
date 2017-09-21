@@ -1,5 +1,5 @@
 extends Camera2D
-export var target = "../Player"
+export(NodePath) var target
 export var forward_offset = 60
 export var max_y_offset = 5
 export var x_smoothing = .05
