@@ -1,4 +1,4 @@
-extends "res://Part8/character_controller.gd"
+extends "res://Part7/character_controller.gd"
 
 var last_anim = ""
 onready var anim = get_node("anim")
